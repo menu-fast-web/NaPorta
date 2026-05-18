@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "tsx --watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src/server.ts --format cjs --clean --out-dir build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "@types/node": "^25.8.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.22.1",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "fastify": "^5.8.5",
+    "zod": "^4.4.3"
+  }
+}
