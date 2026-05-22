@@ -4,22 +4,26 @@
   <img
     src="assets/images/logo.svg"
     alt="Logo do Hotel"
-    class="w-24 h-24 rounded-full border-white dark:border-gray-800 shadow-md mb-4 object-contain bg-gray-100"
+    class="w-32 h-32 rounded-full border-white dark:border-gray-800 shadow-md mb-4 object-contain bg-gray-100"
   />
-  <h1 class="text-2xl font-bold mb-2">Na Porta</h1>
-  <p class="text-center mb-4">Bem-vindo ao nosso serviço de quarto digital</p>
+  <h1 class="text-3xl font-bold mb-1">Na Porta</h1>
+  <p class="text-sm text-gray-500 dark:text-gray-400 text-center mb-4">
+    Bem-vindo ao serviço de quarto digital
+  </p>
   <div
-    class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-full max-w-md text-center mb-6"
+    class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 w-full max-w-md text-center mb-6"
   >
     <p class="font-medium mb-2">Você está no quarto:</p>
     <span class="text-2xl font-bold">302</span>
   </div>
-  <div class="flex flex-col items-center gap-4 mb-6">
-    <a mat-raised-button routerLink="/menu">Ver Cardápio</a>
-    <a mat-stroked-button color="warn" routerLink="/status"
-      >Ver Status do Pedido</a
-    >
+  <div class="flex flex-col w-full max-w-md gap-3 mb-6">
+    <a mat-raised-button class="w-full" routerLink="/menu">Ver Cardápio</a>
+    <a mat-stroked-button class="w-full" color="warn" routerLink="/status">
+      Ver Status do Pedido
+    </a>
   </div>
 
-  <span class="text-sm text-gray-500">Pedidos disponíveis 24 horas</span>
+  <span class="text-xs text-gray-400 mt-2">
+    Atendimento 24h • Pedido digital
+  </span>
 </main>
