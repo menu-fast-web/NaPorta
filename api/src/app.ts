@@ -1,8 +1,14 @@
 import fastify, { type FastifyReply, type FastifyRequest } from "fastify";
 import z from "zod";
 import { prisma } from "./lib/prisma";
+import { hash } from "bcryptjs";
+import cors from '@fastify/cors';
 
 export const app = fastify();
+
+app.register(cors, 
+  { origin: '*' }
+);
 
 const getUserSchemaRequest = z.object({
   query: z.string().optional(),
@@ -54,7 +60,7 @@ app.post("/users", async (req: FastifyRequest, reply: FastifyReply) => {
       data: {
         name,
         email,
-        password_hash: password,
+        password_hash: await hash(password, 6),
       },
     });
 
