@@ -1,21 +1,7 @@
 <header class="flex flex-col items-center w-full gap-6 mb-6">
-  <h1 class="text-2xl font-bold tracking-tight text-gray-900">
+  <!-- <h1 class="text-2xl font-bold tracking-tight text-gray-900">
     Explore Nosso Catálogo
-  </h1>
-
-  <div class="flex items-center gap-3 w-full">
-    <span
-      class="h-px flex-1 bg-gradient-to-r from-transparent to-[#D4A373]"
-    ></span>
-    <div
-      class="flex items-center justify-center w-10 h-10 rounded-full bg-[#111827] text-white shadow-md"
-    >
-      <mat-icon>restaurant_menu</mat-icon>
-    </div>
-    <span
-      class="h-px flex-1 bg-gradient-to-l from-transparent to-[#D4A373]"
-    ></span>
-  </div>
+  </h1> -->
 
   <div class="relative w-full max-w-md">
     <mat-icon class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -24,8 +10,22 @@
     <input
       type="text"
       placeholder="O que vai pedir hoje?"
-      class="w-full bg-white rounded-2xl border border-[#E5E7EB] py-4 pl-12 pr-4 shadow-sm outline-none focus:border-[#D4A373] focus:ring-2 focus:ring-[#D4A373]/20 transition-all"
+      class="w-full bg-white rounded-2xl shadow-md py-4 pl-12 pr-4 border-0 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-700/20 transition-all"
     />
+  </div>
+
+  <div class="flex items-center gap-3 w-full">
+    <span
+      class="h-px flex-1 bg-gradient-to-r from-transparent to-zinc-800"
+    ></span>
+    <div
+      class="flex items-center justify-center w-10 h-10 rounded-full bg-[#111827] text-white shadow-md"
+    >
+      <mat-icon>restaurant_menu</mat-icon>
+    </div>
+    <span
+      class="h-px flex-1 bg-gradient-to-l from-transparent to-zinc-800"
+    ></span>
   </div>
 
   <nav
@@ -39,19 +39,19 @@
     </button>
     <button
       mat-stroked-button
-      class="!rounded-full !px-5 !py-2 !text-sm !border-[#D4A373] !text-[#111827] hover:!bg-[#D4A373] hover:!text-white !transition-all !shrink-0"
+      class="!rounded-full !px-5 !py-2 !text-sm !border-blue-700 !text-blue-700 hover:!bg-black hover:!border-white hover:!text-white !transition-all !shrink-0"
     >
       Entradas
     </button>
     <button
       mat-stroked-button
-      class="!rounded-full !px-5 !py-2 !text-sm !border-[#D4A373] !text-[#111827] hover:!bg-[#D4A373] hover:!text-white !transition-all !shrink-0"
+      class="!rounded-full !px-5 !py-2 !text-sm !border-blue-700 !text-blue-700 hover:!bg-black hover:!border-white hover:!text-white !transition-all !shrink-0"
     >
       Pratos
     </button>
     <button
       mat-stroked-button
-      class="!rounded-full !px-5 !py-2 !text-sm !border-[#D4A373] !text-[#111827] hover:!bg-[#D4A373] hover:!text-white !transition-all !shrink-0"
+      class="!rounded-full !px-5 !py-2 !text-sm !border-blue-700 !text-blue-700 hover:!bg-black hover:!border-white hover:!text-white !transition-all !shrink-0"
     >
       Bebidas
     </button>
@@ -110,44 +110,50 @@
 </ng-template>
 
 <section aria-label="Mais populares" class="mb-8">
-  <h2 class="text-lg font-bold mb-4 text-gray-900">Maior Popularidade</h2>
-  <div class="w-full max-w-xs mx-auto">
+  <h2 class="text-lg font-bold mb-4 text-gray-900">
+    Lista de Refeições Disponíveis
+  </h2>
+  <div class="grid grid-cols-3 gap-4">
     <div
+      *ngFor="let item of items"
       class="bg-white rounded-2xl shadow-sm overflow-hidden text-black transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
     >
       <div class="relative">
         <img
-          src="assets/images/card-menu.avif"
-          alt="Filé de frango a milanesa"
+          [src]="item.image"
+          [alt]="item.name"
           class="w-full h-44 object-cover transition-transform duration-300 hover:scale-105"
         />
         <span
           class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow"
-          >-25%</span
         >
+          -{{ item.discount }}%
+        </span>
       </div>
       <div class="p-4 flex flex-col gap-2">
-        <p class="text-base font-semibold leading-tight">
-          Filé de frango a milanesa
-        </p>
+        <p class="text-base font-semibold leading-tight">{{ item.name }}</p>
         <div class="flex items-center gap-3 text-xs text-gray-400">
           <span class="flex items-center gap-1">
             <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
-            Serve 2 pessoas
+            Serve {{ item.serves }} pessoas
           </span>
           <span>•</span>
           <span class="flex items-center gap-1">
             <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
-            30 min
+            {{ item.time }} min
           </span>
         </div>
         <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
-          Filé de frango a milanesa, servido com arroz e salada
+          {{ item.description }}
         </p>
         <div class="flex items-center justify-between mt-1">
           <div>
-            <p class="text-base font-bold text-gray-900">R$ 29,90</p>
-            <p class="text-xs text-gray-400 line-through">R$ 39,90</p>
+            <p class="text-base font-bold text-gray-900">
+              R$ {{ item.price.toFixed(2) }}
+            </p>
+            <p class="text-xs text-gray-400 line-through">
+              R$ {{ item.oldPrice.toFixed(2) }}
+            </p>
           </div>
           <button
             routerLink="/cart"
@@ -158,5 +164,35 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="flex items-center justify-center gap-1 mt-8">
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+    >
+      <mat-icon class="!text-base !w-4 !h-4">chevron_left</mat-icon>
+    </button>
+
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-gray-900 text-white text-sm font-medium"
+    >
+      1
+    </button>
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-md text-gray-500 text-sm font-medium hover:bg-gray-100 transition-colors"
+    >
+      2
+    </button>
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-md text-gray-500 text-sm font-medium hover:bg-gray-100 transition-colors"
+    >
+      3
+    </button>
+
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-500 hover:bg-gray-100 transition-colors"
+    >
+      <mat-icon class="!text-base !w-4 !h-4">chevron_right</mat-icon>
+    </button>
   </div>
 </section>
