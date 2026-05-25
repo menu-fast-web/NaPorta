@@ -1,0 +1,63 @@
+/* Estilização da Página de Status do Pedido */
+
+/* Círculo base dos passos do progresso */
+.step-circle {
+  @apply w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 z-10;
+}
+
+/* Passo concluído: Dourado elegante com ícone branco */
+.step-completed {
+  @apply bg-[#D4A373] text-white;
+}
+
+/* Passo atual/ativo: Preto clássico com realce (ring) e animação micro-pulsante */
+.step-active {
+  @apply bg-[#111827] text-white ring-4 ring-gray-100;
+}
+
+.step-active mat-icon {
+  animation: pulse-icon 2.5s infinite ease-in-out;
+}
+
+/* Passo pendente: Fundo branco com borda cinza bem suave e ícone cinza */
+.step-pending {
+  @apply bg-white text-gray-300 border-2 border-gray-100;
+}
+
+/* Botão Principal: Preto do cardápio com transição para transparente/outline */
+.btn-primary {
+  @apply bg-[#111827] text-white rounded-full font-semibold px-6 py-3.5 border-2 border-transparent hover:bg-white hover:border-[#111827] hover:text-[#111827] cursor-pointer outline-none transition-all duration-200 text-sm flex items-center justify-center gap-2;
+}
+
+/* Botão Secundário: Outline cinza discreto com preenchimento para preto sólido no hover */
+.btn-secondary {
+  @apply bg-transparent text-gray-600 rounded-full font-semibold px-6 py-3.5 border-2 border-gray-200 hover:bg-[#111827] hover:border-[#111827] hover:text-white transition-all duration-200 text-sm flex items-center justify-center gap-2 cursor-pointer;
+}
+
+/* Em Andamento Badge - Efeito pulsar suave no texto */
+.status-badge {
+  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.2);
+  animation: badge-shadow 2s infinite;
+}
+
+/* Animações */
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes badge-shadow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
