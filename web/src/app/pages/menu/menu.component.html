@@ -1,23 +1,142 @@
-<h1>Cardápio</h1>
-<p>Escolha as suas delícias abaixo e aproveite o melhor do nosso serviço!</p>
-<ul>
-  <li>
-    Pizza Margherita - R$ 25,00
-    <button routerLink="/product/1">Adicionar ao Carrinho</button>
-  </li>
-  <li>
-    Hambúrguer Clássico - R$ 20,00
-    <button routerLink="/product/2">Adicionar ao Carrinho</button>
-  </li>
-  <li>
-    Salada Caesar - R$ 15,00
-    <button routerLink="/product/3">Adicionar ao Carrinho</button>
-  </li>
-  <li>
-    Sorvete de Chocolate - R$ 10,00
-    <button routerLink="/product/4">Adicionar ao Carrinho</button>
-  </li>
-</ul>
+<h1>Explore Nosso Catálogo</h1>
+<div class="flex flex-row items-center gap-3 w-full mb-6">
+  <span
+    class="h-px flex-1 bg-gradient-to-r from-transparent to-gray-400"
+  ></span>
+  <mat-icon class="text-gray-400">restaurant_menu</mat-icon>
+  <span
+    class="h-px flex-1 bg-gradient-to-l from-transparent to-gray-400"
+  ></span>
+</div>
+<div class="flex flex-col items-center w-full mb-6">
+  <input
+    type="text"
+    placeholder="Encontre seu prato favorito"
+    class="flex justify-center items-center"
+  />
+</div>
+<div class="flex flex-row items-center justify-center gap-3 w-full mb-6">
+  <button
+    mat-stroked-button
+    class="!rounded-full !px-4 !py-1 !text-sm !border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white !transition-colors"
+  >
+    Entradas
+  </button>
+  <button
+    mat-stroked-button
+    class="!rounded-full !px-4 !py-1 !text-sm !border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white !transition-colors"
+  >
+    Pratos
+  </button>
+  <button
+    mat-stroked-button
+    class="!rounded-full !px-4 !py-1 !text-sm !border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white !transition-colors"
+  >
+    Bebidas
+  </button>
+</div>
 
-<button routerLink="/cart">Ver Carrinho</button>
-<button routerLink="/">Voltar para Home</button>
+<section aria-label="Mais populares" class="mb-6">
+  <h2 class="text-2xl font-bold mb-4">Maior Popularidade</h2>
+  <div class="w-full max-w-xs mx-auto">
+    <div
+      class="bg-white rounded-2xl shadow-sm overflow-hidden text-black transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+    >
+      <div class="relative">
+        <img
+          src="assets/images/card-menu.avif"
+          alt="Prato Popular"
+          class="w-full h-44 object-cover transition-transform duration-300 hover:scale-105"
+        />
+        <span
+          class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow"
+        >
+          -25%
+        </span>
+      </div>
+      <div class="p-4 flex flex-col gap-2">
+        <p class="text-base font-semibold leading-tight">
+          Filé de frango a milanesa
+        </p>
+        <div class="flex items-center gap-3 text-xs text-gray-400">
+          <span class="flex items-center gap-1">
+            <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
+            Serve 2 pessoas
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
+            30 min
+          </span>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+          Filé de frango a milanesa, servido com arroz e salada
+        </p>
+        <div class="flex items-center justify-between mt-1">
+          <div>
+            <p class="text-base font-bold text-gray-900">R$ 29,90</p>
+            <p class="text-xs text-gray-400 line-through">R$ 39,90</p>
+          </div>
+          <button
+            routerLink="/cart"
+            class="inline-flex items-center justify-center bg-transparent border border-gray-900 text-gray-900 text-xs font-medium px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-200 active:scale-95 cursor-pointer"
+          >
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section aria-label="Outros Pratos" class="mb-6">
+  <h3 class="text-2xl font-bold mb-4">Explore Nosso Catálogo</h3>
+  <div class="w-full max-w-xs mx-auto">
+    <div
+      class="bg-white rounded-2xl shadow-sm overflow-hidden text-black transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+    >
+      <div class="relative">
+        <img
+          src="assets/images/card-menu.avif"
+          alt="Prato Popular"
+          class="w-full h-44 object-cover transition-transform duration-300 hover:scale-105"
+        />
+        <span
+          class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow"
+        >
+          -25%
+        </span>
+      </div>
+      <div class="p-4 flex flex-col gap-2">
+        <p class="text-base font-semibold leading-tight">
+          Filé de frango a milanesa
+        </p>
+        <div class="flex items-center gap-3 text-xs text-gray-400">
+          <span class="flex items-center gap-1">
+            <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
+            Serve 2 pessoas
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
+            30 min
+          </span>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+          Filé de frango a milanesa, servido com arroz e salada
+        </p>
+        <div class="flex items-center justify-between mt-1">
+          <div>
+            <p class="text-base font-bold text-gray-900">R$ 29,90</p>
+            <p class="text-xs text-gray-400 line-through">R$ 39,90</p>
+          </div>
+          <button
+            routerLink="/cart"
+            class="inline-flex items-center justify-center bg-transparent border border-gray-900 text-gray-900 text-xs font-medium px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-200 active:scale-95 cursor-pointer"
+          >
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
