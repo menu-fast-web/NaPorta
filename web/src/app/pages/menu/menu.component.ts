@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  items = Array.from({ length: 10 }, (_, i) => ({
+  items = Array.from({ length: 3 }, (_, i) => ({
     id: i + 1,
     name: 'Filé de frango a milanesa',
     description: 'Filé de frango a milanesa, servido com arroz e salada',

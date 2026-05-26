@@ -109,64 +109,140 @@
   </article>
 </ng-template>
 
-<section aria-label="Mais populares" class="mb-8">
-  <h2 class="text-lg font-bold mb-4 text-gray-900">
-    Lista de Refeições Disponíveis
-  </h2>
-  <div class="grid grid-cols-3 gap-4">
-    <div
-      *ngFor="let item of items"
-      class="bg-white rounded-2xl shadow-sm overflow-hidden text-black transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+<section aria-label="Mais populares" class="flex flex-col mb-8 gap-16">
+  <div class="shadow-sm">
+    <h2
+      class="text-lg font-bold mb-4 text-gray-900 px-8 flex items-center gap-2"
     >
-      <div class="relative">
-        <img
-          [src]="item.image"
-          [alt]="item.name"
-          class="w-full h-44 object-cover transition-transform duration-300 hover:scale-105"
-        />
-        <span
-          class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow"
-        >
-          -{{ item.discount }}%
-        </span>
-      </div>
-      <div class="p-4 flex flex-col gap-2">
-        <p class="text-base font-semibold leading-tight">{{ item.name }}</p>
-        <div class="flex items-center gap-3 text-xs text-gray-400">
-          <span class="flex items-center gap-1">
-            <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
-            Serve {{ item.serves }} pessoas
-          </span>
-          <span>•</span>
-          <span class="flex items-center gap-1">
-            <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
-            {{ item.time }} min
+      <mat-icon style="font-size: 20px; width: 20px; height: 20px"
+        >workspace_premium</mat-icon
+      >
+      Top 3 Pedidos da Casa
+    </h2>
+    <div class="grid grid-cols-3 gap-4">
+      <div
+        *ngFor="let item of items"
+        class="bg-white rounded-2xl shadow-sm overflow-hidden text-black transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+      >
+        <div class="relative">
+          <img
+            [src]="item.image"
+            [alt]="item.name"
+            class="w-full h-44 object-cover transition-transform duration-300 hover:scale-105"
+          />
+          <span
+            class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow"
+          >
+            -{{ item.discount }}%
           </span>
         </div>
-        <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
-          {{ item.description }}
-        </p>
-        <div class="flex items-center justify-between mt-1">
-          <div>
-            <p class="text-base font-bold text-gray-900">
-              R$ {{ item.price.toFixed(2) }}
-            </p>
-            <p class="text-xs text-gray-400 line-through">
-              R$ {{ item.oldPrice.toFixed(2) }}
-            </p>
+        <div class="p-4 flex flex-col gap-2">
+          <p class="text-base font-semibold leading-tight">{{ item.name }}</p>
+          <div class="flex items-center gap-3 text-xs text-gray-400">
+            <span class="flex items-center gap-1">
+              <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
+              Serve {{ item.serves }} pessoas
+            </span>
+            <span>•</span>
+            <span class="flex items-center gap-1">
+              <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
+              {{ item.time }} min
+            </span>
           </div>
-          <button
-            routerLink="/cart"
-            class="inline-flex items-center justify-center bg-transparent border border-gray-900 text-gray-900 text-xs font-medium px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-200 active:scale-95"
-          >
-            Adicionar
-          </button>
+          <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+            {{ item.description }}
+          </p>
+          <div class="flex items-center justify-between mt-1">
+            <div>
+              <p class="text-base font-bold text-gray-900">
+                R$ {{ item.price.toFixed(2) }}
+              </p>
+              <p class="text-xs text-gray-400 line-through">
+                R$ {{ item.oldPrice.toFixed(2) }}
+              </p>
+            </div>
+            <button
+              routerLink="/cart"
+              class="inline-flex items-center justify-center bg-transparent border border-gray-900 text-gray-900 text-xs font-medium px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-all duration-200 active:scale-95"
+            >
+              Adicionar
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flex items-center justify-center gap-1 mt-8">
+  <div class="rounded-lg border border-gray-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-gray-200 bg-gray-50">
+          <th class="text-left text-xs font-medium text-gray-500 px-4 py-3">
+            Refeição
+          </th>
+          <th class="text-left text-xs font-medium text-gray-500 px-4 py-3">
+            Informações
+          </th>
+          <th class="text-left text-xs font-medium text-gray-500 px-4 py-3">
+            Preço
+          </th>
+          <th class="px-4 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of items"
+          class="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors"
+        >
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-3">
+              <img
+                [src]="item.image"
+                [alt]="item.name"
+                class="w-10 h-10 rounded-md object-cover"
+              />
+              <div>
+                <p class="font-medium text-gray-900">{{ item.name }}</p>
+                <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
+                  {{ item.description }}
+                </p>
+              </div>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-3 text-xs text-gray-400">
+              <span class="flex items-center gap-1">
+                <mat-icon class="!text-sm !w-4 !h-4">restaurant</mat-icon>
+                Serve {{ item.serves }} pessoas
+              </span>
+              <span>•</span>
+              <span class="flex items-center gap-1">
+                <mat-icon class="!text-sm !w-4 !h-4">access_time</mat-icon>
+                {{ item.time }} min
+              </span>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            <p class="font-medium text-gray-900">
+              R$ {{ item.price.toFixed(2) }}
+            </p>
+            <p class="text-xs text-gray-400 line-through mt-0.5">
+              R$ {{ item.oldPrice.toFixed(2) }}
+            </p>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <button
+              class="inline-flex items-center justify-center bg-gray-900 text-white text-xs font-medium px-4 py-2 rounded-md hover:bg-gray-800 transition-colors active:scale-95"
+            >
+              Adicionar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <div class="flex items-center justify-center gap-1 mt-8">
     <button
       class="inline-flex items-center justify-center w-9 h-9 rounded-md border border-gray-200 text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
     >
@@ -194,5 +270,5 @@
     >
       <mat-icon class="!text-base !w-4 !h-4">chevron_right</mat-icon>
     </button>
-  </div>
+  </div> -->
 </section>
