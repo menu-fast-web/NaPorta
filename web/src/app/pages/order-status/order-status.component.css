@@ -5,9 +5,9 @@
   @apply w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 z-10;
 }
 
-/* Passo concluído: Dourado elegante com ícone branco */
+/* Passo concluído: Azul elegante com ícone branco */
 .step-completed {
-  @apply bg-[#D4A373] text-white;
+  @apply bg-blue-600 text-white;
 }
 
 /* Passo atual/ativo: Preto clássico com realce (ring) e animação micro-pulsante */
@@ -24,14 +24,14 @@
   @apply bg-white text-gray-300 border-2 border-gray-100;
 }
 
-/* Botão Principal: Preto do cardápio com transição para transparente/outline */
+/* Botão Principal: Estilo "Entradas" (rounded-full, border-blue-700, text-blue-700, hover:bg-black) */
 .btn-primary {
-  @apply bg-[#111827] text-white rounded-full font-semibold px-6 py-3.5 border-2 border-transparent hover:bg-white hover:border-[#111827] hover:text-[#111827] cursor-pointer outline-none transition-all duration-200 text-sm flex items-center justify-center gap-2;
+  @apply bg-transparent text-blue-700 border border-blue-700 rounded-full font-semibold px-6 py-2.5 hover:bg-black hover:border-white hover:text-white transition-all duration-200 text-sm flex items-center justify-center gap-2 cursor-pointer;
 }
 
-/* Botão Secundário: Outline cinza discreto com preenchimento para preto sólido no hover */
+/* Botão Secundário: Estilo "Entradas" (rounded-full, border-blue-700, text-blue-700, hover:bg-black) */
 .btn-secondary {
-  @apply bg-transparent text-gray-600 rounded-full font-semibold px-6 py-3.5 border-2 border-gray-200 hover:bg-[#111827] hover:border-[#111827] hover:text-white transition-all duration-200 text-sm flex items-center justify-center gap-2 cursor-pointer;
+  @apply bg-transparent text-blue-700 border border-blue-700 rounded-full font-semibold px-6 py-2.5 hover:bg-black hover:border-white hover:text-white transition-all duration-200 text-sm flex items-center justify-center gap-2 cursor-pointer;
 }
 
 /* Em Andamento Badge - Efeito pulsar suave no texto */

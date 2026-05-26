@@ -4,8 +4,8 @@
   <div
     class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 md:pb-4 gap-2">
     <div class="flex items-center gap-2">
-      <mat-icon class="text-gold-dark !w-6 !h-6">shopping_cart</mat-icon>
-      <h1 class="font-bold text-xl md:text-2xl text-gold-dark">
+      <mat-icon class="text-blue-600 !w-6 !h-6">shopping_cart</mat-icon>
+      <h1 class="font-bold text-xl md:text-2xl text-gray-900">
         Meu Carrinho
       </h1>
     </div>
@@ -18,10 +18,10 @@
     <!-- Listagem de Produtos do Carrinho -->
     <section class="lg:col-span-2 flex flex-col gap-4">
       <div
-        class="bg-white rounded-xl shadow-md shadow-[#C79B2B]/20 p-4 md:p-6 flex flex-col sm:flex-row gap-4 items-start">
+        class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 flex flex-col sm:flex-row gap-4 items-start">
 
         <!-- Seleção do Item -->
-        <input type="checkbox" checked class="w-4 h-4 mt-1 accent-[#C79B2B] cursor-pointer shrink-0" />
+        <input type="checkbox" checked class="w-4 h-4 mt-1 accent-blue-600 cursor-pointer shrink-0" />
 
         <!-- Imagem do Produto -->
         <img src="assets/images/card-menu.avif" alt="Filé de frango a milanesa"
@@ -37,7 +37,7 @@
           <div class="flex items-center gap-2">
             <label class="text-xs md:text-sm text-gray-500">Qtd:</label>
             <input type="number" min="1" max="10" value="1"
-              class="w-16 border border-gray-200 rounded-md px-2 py-1 text-xs md:text-sm outline-none focus:border-[#F1C24A] focus:ring-1 focus:ring-[#F9E446]" />
+              class="w-16 border border-gray-200 rounded-md px-2 py-1 text-xs md:text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-700/20" />
           </div>
 
           <!-- Subtotal do Item e Ação de Remoção -->
@@ -58,9 +58,9 @@
 
     <!-- Resumo do Pedido (Checkout Sidebar) -->
     <aside class="lg:col-span-1">
-      <div class="bg-white p-4 md:p-5 rounded-xl shadow-md shadow-[#C79B2B]/20 flex flex-col gap-4 sticky top-4">
+      <div class="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 sticky top-4">
 
-        <h2 class="font-bold text-base md:text-lg text-gold-dark border-b border-gray-200 pb-3">
+        <h2 class="font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-3">
           Resumo do Pedido
         </h2>
 
@@ -83,12 +83,12 @@
         <!-- Ações do Pedido -->
         <div class="flex flex-col gap-3 my-2">
           <button
-            class="bg-gray-500 text-white flex items-center justify-center rounded-md w-full py-3.5 border-2 border-transparent hover:bg-white hover:border-gold-dark hover:text-gold-dark cursor-pointer outline-none transition-all duration-200">
+            class="w-full inline-flex items-center justify-center bg-transparent border border-blue-700 text-blue-700 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-black hover:border-white hover:text-white transition-all duration-200 cursor-pointer">
             Finalizar Compra
           </button>
           <p class="text-center text-xs text-gray-400 font-medium">ou</p>
           <button routerLink="/menu"
-            class="bg-white text-gold-dark flex items-center justify-center rounded-md w-full py-3.5 border-2 border-gold-dark hover:bg-gray-100 hover:border-gold-dark hover:text-gold-dark cursor-pointer outline-none transition-all duration-200">
+            class="w-full inline-flex items-center justify-center bg-transparent border border-blue-700 text-blue-700 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-black hover:border-white hover:text-white transition-all duration-200 cursor-pointer">
             Continuar Comprando
           </button>
         </div>
