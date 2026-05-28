@@ -38,3 +38,11 @@
 
 ## Comandos para Iniciar o Projeto
 
+### NodeJS
+
+### AngularJS
+- ng generate component pages/admin-login
+  [serve para criar páginas no projeto, já realiza o registro automaticamente no app.module.ts]
+
+- ng g c pages/admin-login
+  [serve para criar a página, mas é um comando mais curto em compensação com o anterior]
