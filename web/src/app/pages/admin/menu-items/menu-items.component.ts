@@ -1,43 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MenuService, MenuItem, MenuItemCategory } from '../../../services/menu.service';
 
-enum MenuItemCategory {
-  breakfast = 'Café da manhã',
-  lunch = 'Almoço',
-  dinner = 'Jantar',
-  drinks = 'Bebidas',
-  snacks = 'Lanches',
-}
-
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image_url: string;
-  category: keyof typeof MenuItemCategory;
-  available: boolean;
-}
+const categoryLabel: Record<MenuItemCategory, string> = {
+  breakfast: 'Café da manhã',
+  lunch: 'Almoço',
+  dinner: 'Jantar',
+  drinks: 'Bebidas',
+  snacks: 'Lanches',
+};
 
 @Component({
   selector: 'app-menu-items',
   templateUrl: './menu-items.component.html',
 })
-export class MenuItemsComponent {
-  categoryLabel = MenuItemCategory;
+export class MenuItemsComponent implements OnInit {
+  items: MenuItem[] = [];
+  categoryLabel = categoryLabel;
+  showForm = false;
+  Number = Number;
 
-  items: MenuItem[] = [
-    { id: '1', name: 'Filé de frango a milanesa', description: 'Servido com arroz e salada', price: 29.90, image_url: 'assets/images/card-menu.avif', category: 'lunch', available: true },
-    { id: '2', name: 'Hambúrguer artesanal', description: 'Pão brioche, carne 180g, queijo e molho especial', price: 34.90, image_url: 'assets/images/card-menu.avif', category: 'snacks', available: true },
-    { id: '3', name: 'Suco de laranja', description: 'Suco natural 300ml', price: 12.90, image_url: 'assets/images/card-menu.avif', category: 'drinks', available: true },
-    { id: '4', name: 'Salada Caesar', description: 'Alface, croutons, parmesão e molho caesar', price: 22.90, image_url: 'assets/images/card-menu.avif', category: 'lunch', available: false },
-    { id: '5', name: 'Omelete de queijo', description: 'Omelete com queijo prato e ervas finas', price: 18.90, image_url: 'assets/images/card-menu.avif', category: 'breakfast', available: true },
-  ];
+  form = {
+    name: '',
+    description: '',
+    price: 0,
+    image_url: '',
+    category: 'lunch' as MenuItemCategory,
+    available: true,
+  };
+
+  constructor(private menuService: MenuService) {}
+
+  ngOnInit() {
+    this.menuService.getAll().subscribe(items => this.items = items);
+  }
 
   toggleAvailable(item: MenuItem) {
-    item.available = !item.available;
+    this.menuService.update(item.id, { available: !item.available }).subscribe(updated => {
+      item.available = updated.available;
+    });
   }
 
   deleteItem(id: string) {
     this.items = this.items.filter(i => i.id !== id);
+  }
+
+  submitForm() {
+    this.menuService.create(this.form).subscribe(item => {
+      this.items = [item, ...this.items];
+      this.showForm = false;
+      this.form = { name: '', description: '', price: 0, image_url: '', category: 'lunch', available: true };
+    });
   }
 }

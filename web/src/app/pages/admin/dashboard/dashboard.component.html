@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-2">
     <div class="flex flex-row justify-between">
       <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-      <h2 class="text-sm font-light text-gray-300">Olá, Henrique Maximo!</h2>
+      <h2 class="text-sm font-light text-gray-300">Olá, {{ userName }}!</h2>
     </div>
     <p class="text-sm text-gray-400">
       {{ greeting }}, seja bem-vindo de volta!
@@ -52,19 +52,15 @@
         >
           <div class="flex flex-col gap-0.5">
             <p class="text-sm font-medium text-gray-900">
-              Quarto {{ order.room }}
+              Quarto {{ order.guest.room.number }}
             </p>
-            <p class="text-xs text-gray-400">{{ order.item }}</p>
+            <p class="text-xs text-gray-400">{{ order.items[0]?.menu_item?.name }}</p>
           </div>
           <span
             class="text-xs font-medium px-2.5 py-1 rounded-full"
-            [ngClass]="{
-              'bg-yellow-50 text-yellow-700': order.status === 'pending',
-              'bg-blue-50 text-blue-700': order.status === 'preparing',
-              'bg-green-50 text-green-700': order.status === 'delivered',
-            }"
+            [ngClass]="statusConfig[order.status].classes"
           >
-            {{ order.statusLabel }}
+            {{ statusConfig[order.status].label }}
           </span>
         </div>
       </div>
@@ -84,18 +80,7 @@
         >
       </div>
       <div class="flex flex-col divide-y divide-gray-100">
-        <div
-          *ngFor="let item of topItems"
-          class="flex items-center justify-between py-3"
-        >
-          <div class="flex flex-col gap-0.5">
-            <p class="text-sm font-medium text-gray-900">{{ item.name }}</p>
-            <p class="text-xs text-gray-400">{{ item.category }}</p>
-          </div>
-          <span class="text-sm font-bold text-gray-900"
-            >{{ item.orders }}x</span
-          >
-        </div>
+        <p *ngIf="recentOrders.length === 0" class="text-xs text-gray-400 py-3">Nenhum pedido ainda.</p>
       </div>
     </div>
   </div>

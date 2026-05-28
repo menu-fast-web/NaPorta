@@ -1,35 +1,41 @@
 <div class="grid grid-rows-[auto_1fr] gap-4 md:gap-6">
-  <div
-    class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 md:pb-4 gap-2"
-  >
-    <div class="flex items-center justify-center gap-2">
-      <mat-icon class="text-blue-600">shopping_cart</mat-icon>
-      <span class=" text-gray-900 text-xl md:text-2xl">Meu Carrinho</span>
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 md:pb-4 gap-2">
+    <div class="flex items-center gap-2">
+      <mat-icon class="text-gray-900">shopping_cart</mat-icon>
+      <span class="text-gray-900 text-xl md:text-2xl">Meu Carrinho</span>
     </div>
-    <span class="text-xs md:text-sm text-gray-500">1 produto</span>
+    <span class="text-xs md:text-sm text-gray-500">{{ items.length }} {{ items.length === 1 ? 'produto' : 'produtos' }}</span>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+  <div *ngIf="items.length === 0" class="flex flex-col items-center justify-center py-16 gap-3">
+    <mat-icon style="font-size: 48px; width: 48px; height: 48px; color: #d1d5db;">shopping_cart</mat-icon>
+    <p class="text-sm text-gray-400">Seu carrinho está vazio.</p>
+    <button routerLink="/menu" class="inline-flex items-center justify-center bg-gray-900 text-white text-sm font-medium px-6 py-2.5 rounded-md hover:bg-gray-800 transition-colors active:scale-95">
+      Ver cardápio
+    </button>
+  </div>
+
+  <div *ngIf="items.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
     <section class="lg:col-span-2 flex flex-col gap-4">
       <div
+        *ngFor="let item of items"
         class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 flex flex-col sm:flex-row gap-4 items-start"
       >
         <input
           type="checkbox"
-          checked
+          [checked]="item.checked"
+          (change)="toggleCheck(item.menu_item.id)"
           class="w-4 h-4 mt-1 accent-black cursor-pointer shrink-0"
         />
 
         <img
-          src="assets/images/card-menu.avif"
-          alt="Filé de frango a milanesa"
+          [src]="item.menu_item.image_url"
+          [alt]="item.menu_item.name"
           class="w-full sm:w-28 h-28 object-cover rounded-xl bg-gray-50 border border-gray-200 shrink-0"
         />
 
         <div class="flex flex-col gap-2 flex-1 w-full">
-          <p class=" text-sm md:text-base text-gray-900">
-            Filé de frango a milanesa
-          </p>
+          <p class="text-sm md:text-base text-gray-900 font-medium">{{ item.menu_item.name }}</p>
 
           <div class="flex items-center gap-2">
             <label class="text-xs md:text-sm text-gray-500">Qtd:</label>
@@ -37,23 +43,22 @@
               type="number"
               min="1"
               max="10"
-              value="1"
-              class="w-16 shadow-sm border border-blue-600/10 rounded-md px-2 py-1 text-xs md:text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-700/20"
+              [value]="item.quantity"
+              (change)="updateQuantity(item.menu_item.id, +$any($event.target).value)"
+              class="w-16 shadow-sm border border-gray-200 rounded-md px-2 py-1 text-xs md:text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-700/20"
             />
           </div>
 
-          <div
-            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-auto"
-          >
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-auto">
             <p class="text-xs md:text-sm text-gray-500">
               Subtotal:
-              <span class="font-bold text-gray-900">R$ 29,90</span>
+              <span class="font-bold text-gray-900">R$ {{ (Number(item.menu_item.price) * item.quantity).toFixed(2) }}</span>
             </p>
-
             <button
-              routerLink="/menu"
-              class="inline-flex items-center justify-center bg-gray-900 text-white text-sm font-medium px-6 py-2.5 rounded-md hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 active:scale-95 cursor-pointer"
+              (click)="removeItem(item.menu_item.id)"
+              class="inline-flex items-center gap-1.5 justify-center bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-800 transition-colors active:scale-95 cursor-pointer"
             >
+              <mat-icon style="font-size: 14px; width: 14px; height: 14px;">delete</mat-icon>
               Remover
             </button>
           </div>
@@ -62,56 +67,47 @@
     </section>
 
     <aside class="lg:col-span-1">
-      <div
-        class="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 sticky top-4"
-      >
-        <h2
-          class="font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-3"
-        >
+      <div class="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 sticky top-4">
+        <h2 class="font-bold text-base md:text-lg text-gray-900 border-b border-gray-200 pb-3">
           Resumo do Pedido
         </h2>
-        <div class="flex flex-col gap-3 text-sm text-gray-600">
-          <div class="flex justify-between items-center">
-            <span>Itens (1)</span>
-            <span class="font-medium text-gray-900">R$ 29,90</span>
+
+        <div class="flex flex-col gap-2 text-sm text-gray-600">
+          <div *ngFor="let item of checkedItems" class="flex justify-between items-center">
+            <span class="text-xs text-gray-500 line-clamp-1">{{ item.quantity }}x {{ item.menu_item.name }}</span>
+            <span class="text-xs font-medium text-gray-900 shrink-0">R$ {{ (Number(item.menu_item.price) * item.quantity).toFixed(2) }}</span>
           </div>
         </div>
 
-        <div class="border-t border-gray-100 pt-4 mt-2">
-          <div class="flex justify-between items-baseline mb-1">
+        <div class="border-t border-gray-100 pt-4">
+          <div class="flex justify-between items-baseline">
             <span class="text-gray-900 font-bold text-base">Valor Total</span>
-            <span class="text-gray-900 font-black text-2xl tracking-tight"
-              >R$ 29,90</span
-            >
+            <span class="text-gray-900 font-black text-2xl tracking-tight">R$ {{ total.toFixed(2) }}</span>
           </div>
         </div>
+
+        <p *ngIf="error" class="text-xs text-red-500 text-center">{{ error }}</p>
+
         <div class="flex flex-col gap-3 my-2">
           <button
-            class="w-full inline-flex items-center justify-center bg-transparent border border-blue-700 text-blue-700 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-black hover:border-white hover:text-white transition-all duration-200 cursor-pointer"
+            (click)="finalize()"
+            [disabled]="loading"
+            class="w-full inline-flex items-center justify-center bg-gray-900 text-white text-sm font-semibold px-6 py-2.5 rounded-md hover:bg-gray-800 transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
-            Finalizar Pedido
+            {{ loading ? 'Finalizando...' : 'Finalizar Pedido' }}
           </button>
-          <div class="flex items-center justify-center text-center gap-3 w-full">
+          <div class="flex items-center justify-center gap-3 w-full">
             <span class="h-px flex-1 bg-gradient-to-r from-transparent to-zinc-800/50"></span>
-            <p class=" text-sm text-black font-medium">ou</p>
+            <p class="text-sm text-black font-medium">ou</p>
             <span class="h-px flex-1 bg-gradient-to-l from-transparent to-zinc-800/50"></span>
           </div>
           <button
             routerLink="/menu"
-            class="w-full inline-flex items-center justify-center bg-transparent border border-blue-700 text-blue-700 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-black hover:border-white hover:text-white transition-all duration-200 cursor-pointer"
+            class="w-full inline-flex items-center justify-center bg-transparent border border-gray-900 text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-md hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer"
           >
             Adicionar mais Itens
           </button>
         </div>
-
-        <!-- <p
-          class="flex items-center justify-center gap-1.5 text-xs text-gray-500"
-        >
-          <mat-icon class="!text-sm !w-4 !h-4 text-green-500"
-            >verified_user</mat-icon
-          >
-          Compra 100% segura e protegida
-        </p> -->
       </div>
     </aside>
   </div>

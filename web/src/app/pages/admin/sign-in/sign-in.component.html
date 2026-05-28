@@ -48,6 +48,8 @@
           </div>
         </div>
 
+        <p *ngIf="error" class="text-xs text-red-500 text-center">{{ error }}</p>
+
         <button
           type="submit"
           class="flex items-center justify-center gap-2 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors active:scale-95 w-full"

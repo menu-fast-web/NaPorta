@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { MenuItemsComponent } from './pages/admin/menu-items/menu-items.component';
 import { HeaderAdminComponent } from './components/admin/header/header.component';
+import { GuestComponent } from './pages/guest/guest.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +45,11 @@ import { HeaderAdminComponent } from './components/admin/header/header.component
     DashboardComponent,
     OrdersComponent,
     MenuItemsComponent,
+    GuestComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -54,7 +58,7 @@ import { HeaderAdminComponent } from './components/admin/header/header.component
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

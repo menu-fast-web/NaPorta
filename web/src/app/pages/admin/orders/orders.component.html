@@ -24,15 +24,15 @@
           class="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors"
         >
           <td class="px-4 py-3">
-            <span class="font-medium text-gray-900">{{ order.room }}</span>
+            <span class="font-medium text-gray-900">{{ order.guest.room.number }}</span>
           </td>
           <td class="px-4 py-3">
-            <span class="text-gray-700">{{ order.guest }}</span>
+            <span class="text-gray-700">{{ order.guest.name }}</span>
           </td>
           <td class="px-4 py-3">
             <div class="flex flex-col gap-0.5">
               <span *ngFor="let item of order.items" class="text-xs text-gray-500">
-                {{ item.quantity }}x {{ item.name }}
+                {{ item.quantity }}x {{ item.menu_item.name }}
               </span>
             </div>
           </td>
@@ -40,7 +40,7 @@
             <span class="font-medium text-gray-900">R$ {{ total(order).toFixed(2) }}</span>
           </td>
           <td class="px-4 py-3">
-            <span class="text-xs text-gray-400">{{ order.created_at }}</span>
+            <span class="text-xs text-gray-400">{{ order.created_at | date:'HH:mm' }}</span>
           </td>
           <td class="px-4 py-3">
             <span

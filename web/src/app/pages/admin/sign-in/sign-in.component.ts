@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,11 +11,14 @@ export class SignInComponent {
   email = '';
   password = '';
   showPassword = false;
+  error = '';
 
-  constructor(private router: Router) {};
+  constructor(private router: Router, private auth: AuthService) {}
 
   onSubmit() {
-    this.router.navigate(['/admin/dashboard']);
-    console.log({ email: this.email, password: this.password });
-  };
+    this.auth.login(this.email, this.password).subscribe({
+      next: () => this.router.navigate(['/admin/dashboard']),
+      error: () => this.error = 'E-mail ou senha inválidos.',
+    });
+  }
 }

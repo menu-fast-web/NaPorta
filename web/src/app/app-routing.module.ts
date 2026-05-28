@@ -13,12 +13,15 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { SignInComponent } from './pages/admin/sign-in/sign-in.component';
 import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { MenuItemsComponent } from './pages/admin/menu-items/menu-items.component';
+import { authGuard } from './guards/auth.guard';
+import { GuestComponent } from './pages/guest/guest.component';
 
 const routes: Routes = [
   { 
     path: '', 
     component: HomeComponent,
   },
+  { path: 'guest/:token', component: GuestComponent },
   {
     path: '',
     component: LayoutComponent,
@@ -37,6 +40,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: LayoutAdminComponent,
+    canActivate: [authGuard], // protege rotas de admin se não estiver logado (middleware)
     children: [
       {
         path: 'dashboard',

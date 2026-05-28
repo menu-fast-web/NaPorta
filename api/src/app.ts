@@ -8,7 +8,13 @@ import jwt from "@fastify/jwt";
 
 export const app = fastify();
 
-app.register(cors, { origin: "*" });
+app.register(
+  cors, 
+  { 
+    origin: "*",
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'], 
+  },
+);
 
 app.register(
   jwt, 
@@ -25,9 +31,10 @@ const getAuthenticateSchemaBody = z.object({
 app.post("/sessions", async (req: FastifyRequest, reply: FastifyReply) => {
   const { email, password } = getAuthenticateSchemaBody.parse(req.body);
 
+  const emailToLowerCase = email.trim().toLowerCase();
   const user = await prisma.user.findUnique({
     where: {
-      email,
+      email: emailToLowerCase,
     },
   });
 
@@ -43,7 +50,9 @@ app.post("/sessions", async (req: FastifyRequest, reply: FastifyReply) => {
 
   try {
     const token = await reply.jwtSign(
-      {},
+      {
+        name: user.name
+      },
       {
         sign: {
           sub: user.id,
@@ -95,9 +104,10 @@ const createUserSchemaRequest = z.object({
 app.post("/users", async (req: FastifyRequest, reply: FastifyReply) => {
   const { name, email, password } = createUserSchemaRequest.parse(req.body);
 
+  const emailToLowerCase = email.trim().toLowerCase();
   const emailAlredyExists = await prisma.user.findUnique({
     where: {
-      email,
+      email: emailToLowerCase,
     },
   });
 
@@ -109,7 +119,7 @@ app.post("/users", async (req: FastifyRequest, reply: FastifyReply) => {
     const user = await prisma.user.create({
       data: {
         name,
-        email,
+        email: emailToLowerCase,
         password_hash: await hash(password, 6),
       },
     });
@@ -350,3 +360,15 @@ app.patch(
     return reply.status(200).send(order);
   },
 );
+
+app.get('/orders', async (req: FastifyRequest, reply: FastifyReply) => {
+  const orders = await prisma.order.findMany({
+    include: {
+      guest: { include: { room: true } },
+      items: { include: { menu_item: true } },
+    },
+    orderBy: { created_at: 'desc' },
+  });
+
+  return reply.status(200).send(orders);
+});

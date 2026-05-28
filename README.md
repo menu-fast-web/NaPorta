@@ -24,37 +24,42 @@ Software para gerenciamento de solicitação de serviço de quarto. O cliente re
 ## Checklist de Integração — MVP
 
 ### Infraestrutura
-- [ ] Criar service `ApiService` no Angular com `HttpClient` configurado para a URL base da API
-- [ ] Adicionar `HttpClientModule` no `app.module.ts`
-- [ ] Configurar variável de ambiente com a URL da API (`environment.ts`)
+- [x] Criar service `ApiService` no Angular com `HttpClient` configurado para a URL base da API
+- [x] Adicionar `HttpClientModule` no `app.module.ts`
+- [x] Configurar variável de ambiente com a URL da API (`environment.ts`)
 
 ### Autenticação Admin
-- [ ] Criar endpoint `POST /auth` na API (email + senha → retorna token JWT)
-- [ ] Implementar login no `SignInComponent` consumindo `POST /auth`
-- [ ] Salvar token no `localStorage`
-- [ ] Criar `AuthGuard` para proteger rotas do admin
-- [ ] Implementar logout no header admin limpando o token
-
-### Cardápio (cliente)
-- [ ] Criar `MenuService` consumindo `GET /menu`
-- [ ] Substituir dados mockados do `MenuComponent` pela listagem real da API
-- [ ] Exibir itens por categoria com filtro
+- [x] Criar endpoint `POST /sessions` na API (email + senha → retorna token JWT)
+- [x] Implementar login no `SignInComponent` consumindo `POST /sessions`
+- [x] Salvar token no `localStorage`
+- [x] Criar `AuthGuard` para proteger rotas do admin
+- [x] Implementar logout no header admin limpando o token
+- [x] Exibir nome do usuário logado no dashboard (payload JWT)
 
 ### Cardápio (admin)
-- [ ] Listar itens consumindo `GET /menu` no `MenuItemsComponent`
-- [ ] Ativar/desativar item consumindo `PATCH /menu/:id` com `{ available: boolean }`
-- [ ] Deletar item (adicionar endpoint `DELETE /menu/:id` na API)
-- [ ] Criar formulário de novo item consumindo `POST /menu`
+- [x] Listar itens consumindo `GET /menu` no `MenuItemsComponent`
+- [x] Ativar/desativar item consumindo `PATCH /menu/:id` com `{ available: boolean }`
+- [x] Criar formulário de novo item consumindo `POST /menu`
+<!-- - [x] Deletar item — removido, status de disponibilidade substitui essa necessidade -->
+
+### Pedidos (admin)
+- [x] Adicionar endpoint `GET /orders` na API
+- [x] Listar todos os pedidos no `OrdersComponent`
+- [x] Atualizar status consumindo `PATCH /orders/:id/status`
+
+### Dashboard (admin)
+- [x] Conectar stats à API real (pendentes, em preparo, entregues, itens no cardápio)
+- [x] Exibir últimos pedidos reais
+
+### Cardápio (cliente)
+- [ ] Substituir dados mockados do `MenuComponent` pela listagem real da API
+- [ ] Exibir itens por categoria com filtro
 
 ### Pedidos (cliente)
 - [ ] Criar `CartService` para gerenciar itens do carrinho localmente
 - [ ] Criar pedido consumindo `POST /orders` com `guest_id` e itens
 - [ ] Listar pedidos do hóspede consumindo `GET /orders/:guest_id`
 - [ ] Exibir status do pedido em tempo real no `OrderStatusComponent`
-
-### Pedidos (admin)
-- [ ] Listar todos os pedidos (adicionar endpoint `GET /orders` na API)
-- [ ] Atualizar status consumindo `PATCH /orders/:id/status`
 
 ### Hóspede / QRCode
 - [ ] Identificar hóspede via token na URL consumindo `GET /guests/:token`

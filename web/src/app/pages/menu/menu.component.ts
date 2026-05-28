@@ -1,20 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MenuService, MenuItem, MenuItemCategory } from '../../services/menu.service';
+import { CartService } from '../../services/cart.service';
+
+const categoryLabel: Record<MenuItemCategory, string> = {
+  breakfast: 'Café da manhã',
+  lunch: 'Almoço',
+  dinner: 'Jantar',
+  drinks: 'Bebidas',
+  snacks: 'Lanches',
+};
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  // styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
-  items = Array.from({ length: 3 }, (_, i) => ({
-    id: i + 1,
-    name: 'Filé de frango a milanesa',
-    description: 'Filé de frango a milanesa, servido com arroz e salada',
-    price: 29.90,
-    oldPrice: 39.90,
-    discount: 25,
-    serves: 2,
-    time: 30,
-    image: 'assets/images/card-menu.avif',
-  }));
+export class MenuComponent implements OnInit {
+  private allItems: MenuItem[] = [];
+  search = '';
+  pageSize = 6;
+  currentPage = 1;
+  Number = Number;
+  categoryLabel = categoryLabel;
+
+  constructor(private menuService: MenuService, private cartService: CartService) {}
+
+  ngOnInit() {
+    this.menuService.getAll().subscribe(items => this.allItems = items);
+  }
+
+  get top3() {
+    return this.allItems.slice(0, 3);
+  }
+
+  get filtered() {
+    if (!this.search.trim()) return this.allItems;
+    const q = this.search.toLowerCase();
+    return this.allItems.filter(i =>
+      i.name.toLowerCase().includes(q) || i.description.toLowerCase().includes(q)
+    );
+  }
+
+  get totalPages() {
+    return Math.ceil(this.filtered.length / this.pageSize);
+  }
+
+  get pages() {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  get pagedItems() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filtered.slice(start, start + this.pageSize);
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onSearch() {
+    this.currentPage = 1;
+  }
+
+  addToCart(item: MenuItem) {
+    this.cartService.addItem(item);
+  }
 }
