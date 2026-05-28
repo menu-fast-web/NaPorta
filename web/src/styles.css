@@ -20,6 +20,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-size: revert;
+  font-weight: revert;
+}
+
 :root {
   --mdc-protected-button-container-color: #f44336;
   --mdc-protected-button-label-text-color: white;
