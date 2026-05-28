@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     FooterComponent,
     AdminLoginComponent,
     NotFoundComponent,
+    LayoutAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

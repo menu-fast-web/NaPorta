@@ -8,17 +8,12 @@ import { OrderStatusComponent } from './pages/order-status/order-status.componen
 import { LayoutComponent } from './components/layout/layout.component';
 import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
 
 const routes: Routes = [
   { 
     path: '', 
     component: HomeComponent,
-    children: [
-      {
-        path: 'admin',
-        component: AdminLoginComponent
-      }
-    ]
   },
   {
     path: '',
@@ -32,6 +27,16 @@ const routes: Routes = [
       
       { path: 'login', component: AdminLoginComponent },
     ],
+  },
+  {
+    path: 'admin',
+    component: LayoutAdminComponent,
+    children: [
+      {
+        path: 'sign-in',
+        component: AdminLoginComponent
+      }
+    ]
   },
   {
     path: '**',
