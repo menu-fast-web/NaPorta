@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LayoutComponent,
     HeaderComponent,
     FooterComponent,
+    AdminLoginComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

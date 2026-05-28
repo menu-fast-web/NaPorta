@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  // styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
   items = Array.from({ length: 3 }, (_, i) => ({
