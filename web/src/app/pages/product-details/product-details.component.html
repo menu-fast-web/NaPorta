@@ -1,2 +1,89 @@
-<p>product-details works!</p>
-<button routerLink="/">Voltar para Home</button>
+<button routerLink="/menu"
+    class="flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-gray-900 transition-all bg-transparent border-0 outline-none mb-1">
+    <mat-icon class="!w-5 !h-5 !text-[20px]"> arrow_back </mat-icon>
+
+    Voltar ao catálogo
+</button>
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto px-6 py-10">
+    <div class="w-full">
+        <img src="assets/images/card-menu.avif" alt="Filé de frango a milanesa"
+            class="w-full h-[420px] object-cover rounded-3xl shadow-lg" />
+    </div>
+
+    <div class="flex flex-col gap-6">
+        <span class="text-sm font-semibold uppercase tracking-wide text-blue-700">
+            Prato Principal
+        </span>
+        <h2 class="text-4xl font-bold text-gray-900">Filé de frango a milanesa</h2>
+        <p class="text-gray-500 leading-relaxed">
+            Filé de frango empanado e frito, servido com arroz branco e salada verde.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                    <mat-icon class="text-blue-700">schedule</mat-icon>
+                </div>
+                <div class="flex flex-col">
+                    <strong class="text-lg text-gray-900"> 30 min </strong>
+
+                    <span class="text-sm text-gray-500"> Tempo de preparo </span>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                    <mat-icon class="text-blue-700">restaurant</mat-icon>
+                </div>
+
+                <div class="flex flex-col">
+                    <strong class="text-lg text-gray-900"> Serve 2 pessoas </strong>
+
+                    <span class="text-sm text-gray-500"> Rendimento </span>
+                </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm">
+                <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center shrink-0">
+                    <mat-icon class="text-yellow-500">star</mat-icon>
+                </div>
+
+                <div class="flex flex-col">
+                    <strong class="text-lg text-gray-900"> 4.8 </strong>
+
+                    <span class="text-sm text-gray-500"> Avaliação </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <span class="text-4xl font-bold text-gray-900"> R$ 29,90 </span>
+            <span class="text-xl text-gray-400 line-through"> R$ 39,90 </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <label class="text-xs md:text-sm text-gray-500">Qtd:</label>
+            <input type="number" min="1" max="10" value="1"
+                class="w-16 shadow-sm border border-blue-600/10 rounded-md px-2 py-1 text-xs md:text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-700/20" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium text-gray-700"> Observações </label>
+            <textarea rows="5" maxlength="100" placeholder="..."
+                class="w-full border-gray-200 rounded-2xl px-4 bg-white shadow-md py-4 pl-12 pr-4 border-0 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-700/20 transition-all resize-none text-overflow: ellipsis"></textarea>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <button routerLink="/cart"
+                class="flex items-center justify-center gap-2 bg-[#111827] hover:opacity-90 text-white rounded-2xl px-6 py-4 transition-all shadow-md font-medium">
+                <mat-icon>shopping_cart</mat-icon>
+                Adicionar ao carrinho
+            </button>
+
+            <button routerLink="/menu"
+                class="flex items-center justify-center gap-2 border border-blue-700 text-blue-700 hover:bg-[#111827] hover:text-white hover:border-[#111827] rounded-2xl px-6 py-4 transition-all font-medium">
+                <mat-icon>arrow_back</mat-icon>
+                Voltar ao Cardápio
+            </button>
+        </div>
+    </div>
+</section>
