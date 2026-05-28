@@ -21,6 +21,10 @@ export class MenuService {
     return this.api.get<MenuItem[]>('/menu');
   }
 
+  getAllAdmin() {
+    return this.api.get<MenuItem[]>('/menu/all');
+  }
+
   update(id: string, data: Partial<MenuItem>) {
     return this.api.patch<MenuItem>(`/menu/${id}`, data);
   }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -25,6 +26,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { MenuItemsComponent } from './pages/admin/menu-items/menu-items.component';
 import { HeaderAdminComponent } from './components/admin/header/header.component';
+import { ToastComponent } from './components/toast/toast.component';
 import { GuestComponent } from './pages/guest/guest.component';
 
 @NgModule({
@@ -38,6 +40,7 @@ import { GuestComponent } from './pages/guest/guest.component';
     LayoutComponent,
     HeaderComponent,
     HeaderAdminComponent,
+    ToastComponent,
     FooterComponent,
     SignInComponent,
     NotFoundComponent,
@@ -55,6 +58,7 @@ import { GuestComponent } from './pages/guest/guest.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
     FormsModule,
     HttpClientModule,
   ],

@@ -291,6 +291,11 @@ const createOrderSchema = z.object({
     .min(1),
 });
 
+app.get('/menu/all', async (req: FastifyRequest, reply: FastifyReply) => {
+  const items = await prisma.menuItem.findMany();
+  return reply.status(200).send(items);
+});
+
 app.get(
   "/orders/:guest_id",
   async (req: FastifyRequest, reply: FastifyReply) => {

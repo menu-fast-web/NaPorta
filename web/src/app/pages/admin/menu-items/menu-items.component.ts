@@ -31,7 +31,7 @@ export class MenuItemsComponent implements OnInit {
   constructor(private menuService: MenuService) {}
 
   ngOnInit() {
-    this.menuService.getAll().subscribe(items => this.items = items);
+    this.menuService.getAllAdmin().subscribe(items => this.items = items);
   }
 
   toggleAvailable(item: MenuItem) {

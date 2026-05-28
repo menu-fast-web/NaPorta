@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService, MenuItem, MenuItemCategory } from '../../services/menu.service';
 import { CartService } from '../../services/cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastComponent } from '../../components/toast/toast.component';
 
 const categoryLabel: Record<MenuItemCategory, string> = {
   breakfast: 'Café da manhã',
@@ -22,7 +24,7 @@ export class MenuComponent implements OnInit {
   Number = Number;
   categoryLabel = categoryLabel;
 
-  constructor(private menuService: MenuService, private cartService: CartService) {}
+  constructor(private menuService: MenuService, private cartService: CartService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.menuService.getAll().subscribe(items => this.allItems = items);
@@ -63,5 +65,12 @@ export class MenuComponent implements OnInit {
 
   addToCart(item: MenuItem) {
     this.cartService.addItem(item);
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: { message: `${item.name} adicionado ao carrinho` },
+      duration: 2500,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['toast-success'],
+    });
   }
 }
