@@ -1,46 +1,37 @@
 <header class="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
-  <a routerLink="/menu" class="no-underline hover:text-black">
-    <div class="flex items-center justify-center gap-3">
-      <img
-        src="assets/images/logo.svg"
-        alt="Logo"
-        class="w-20 h-20 rounded-full"
-      />
-      <span class="text-2xl"
-        >NA<span class="text-blue-600 font-bold">PORTA</span></span
-      >
+  <a routerLink="/" class="no-underline hover:text-black">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/logo.svg" alt="Logo" class="w-20 h-20 rounded-full" />
+      <div class="flex flex-col">
+        <span class="text-2xl">NA<span class="text-gray-900 font-bold">PORTA</span></span>
+        <span class="text-xs text-gray-400 -mt-1">Serviço de quarto</span>
+      </div>
     </div>
   </a>
 
   <nav class="flex items-center">
     <a
       routerLink="/menu"
-      routerLinkActive="text-red-600"
+      routerLinkActive="text-gray-900 font-medium"
       class="flex items-center gap-1.5 text-sm text-gray-500 px-4 py-2 rounded-md transition-colors no-underline"
     >
-      <mat-icon style="font-size: 18px; width: 18px; height: 18px"
-        >restaurant_menu</mat-icon
-      >
+      <mat-icon style="font-size: 18px; width: 18px; height: 18px">restaurant_menu</mat-icon>
       Cardápio
     </a>
     <a
       routerLink="/status"
-      routerLinkActive="text-red-600"
+      routerLinkActive="text-gray-900 font-medium"
       class="flex items-center gap-1.5 text-sm text-gray-500 px-4 py-2 rounded-md transition-colors no-underline"
     >
-      <mat-icon style="font-size: 18px; width: 18px; height: 18px"
-        >receipt_long</mat-icon
-      >
+      <mat-icon style="font-size: 18px; width: 18px; height: 18px">receipt_long</mat-icon>
       Meus pedidos
     </a>
     <a
       routerLink="/cart"
-      routerLinkActive="text-red-600"
+      routerLinkActive="text-gray-900 font-medium"
       class="flex items-center gap-1.5 text-sm text-gray-500 px-4 py-2 rounded-md transition-colors no-underline"
     >
-      <mat-icon style="font-size: 18px; width: 18px; height: 18px"
-        >shopping_cart</mat-icon
-      >
+      <mat-icon style="font-size: 18px; width: 18px; height: 18px">shopping_cart</mat-icon>
       Carrinho
     </a>
   </nav>
