@@ -16,9 +16,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { SignInComponent } from './pages/admin/sign-in/sign-in.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { OrdersComponent } from './pages/admin/orders/orders.component';
+import { MenuItemsComponent } from './pages/admin/menu-items/menu-items.component';
+import { HeaderAdminComponent } from './components/admin/header/header.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +34,14 @@ import { LayoutAdminComponent } from './components/layout-admin/layout-admin.com
     OrderStatusComponent,
     LayoutComponent,
     HeaderComponent,
+    HeaderAdminComponent,
     FooterComponent,
-    AdminLoginComponent,
+    SignInComponent,
     NotFoundComponent,
     LayoutAdminComponent,
+    DashboardComponent,
+    OrdersComponent,
+    MenuItemsComponent,
   ],
   imports: [
     BrowserModule,

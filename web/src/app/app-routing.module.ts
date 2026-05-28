@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { OrderStatusComponent } from './pages/order-status/order-status.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { SignInComponent } from './pages/admin/sign-in/sign-in.component';
+import { OrdersComponent } from './pages/admin/orders/orders.component';
+import { MenuItemsComponent } from './pages/admin/menu-items/menu-items.component';
 
 const routes: Routes = [
   { 
@@ -24,17 +28,27 @@ const routes: Routes = [
       
       { path: 'cart', component: CartComponent },
       { path: 'status', component: OrderStatusComponent },
-      
-      { path: 'login', component: AdminLoginComponent },
     ],
+  },
+  {
+    path: 'admin/sign-in',
+    component: SignInComponent
   },
   {
     path: 'admin',
     component: LayoutAdminComponent,
     children: [
       {
-        path: 'sign-in',
-        component: AdminLoginComponent
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent
+      },
+      {
+        path: 'menu-items',
+        component: MenuItemsComponent
       }
     ]
   },
