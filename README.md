@@ -2,47 +2,89 @@
 
 <img width="1280" height="698" alt="image" src="https://github.com/user-attachments/assets/4b1a54fe-4f47-49f6-94ef-84d742711be3" />
 
-- Software para gerenciamento de solicitação de serviço de quarto, seleção de refeição através de um cardápio online. O cliente realizar a leitura de um QRCode que identifica o quarto, é direcionado ao sistema e realiza a solicitação de sua refeição, podendo acompanhar o progresso até a entrega no quarto.
+Software para gerenciamento de solicitação de serviço de quarto. O cliente realiza a leitura de um QRCode que identifica o quarto, é direcionado ao sistema e realiza a solicitação de sua refeição, podendo acompanhar o progresso até a entrega.
 
 > 🚧 **Status:** Em desenvolvimento
 
+---
+
 ## Estrutura do Repositório
 
-- **API**: Armazena o código backend da aplicação;
-- **WEB**: Armazena a interface mobile do cliente.
+- **`/api`** — Backend Node.js (Fastify)
+- **`/web`** — Frontend Angular
 
-## Stack Ferramental
+## Stack
 
-- **Backend:** Node.js (Fastify), PrismaORM v7, PostgreSQL, Docker, Zod, tsup, tsx.
-- **Frontend:** Angular.
-- **Tooling:** TypeScript, ESLint, Prettier.
+- **Backend:** Node.js, Fastify, Prisma ORM v7, PostgreSQL, Docker, Zod, bcryptjs
+- **Frontend:** Angular 16, Tailwind CSS, Angular Material
+- **Tooling:** TypeScript, ESLint, Prettier
 
-## Documentação de Negócio
+---
 
-### Requisitos Funcionais (RF)
+## Checklist de Integração — MVP
 
-- [] O administrador deve poder cadastrar usuários
-- [] O administrador deve poder vincular usuário ao quarto
+### Infraestrutura
+- [ ] Criar service `ApiService` no Angular com `HttpClient` configurado para a URL base da API
+- [ ] Adicionar `HttpClientModule` no `app.module.ts`
+- [ ] Configurar variável de ambiente com a URL da API (`environment.ts`)
 
-### Requisitos Não-Funcionais (RNF)
+### Autenticação Admin
+- [ ] Criar endpoint `POST /auth` na API (email + senha → retorna token JWT)
+- [ ] Implementar login no `SignInComponent` consumindo `POST /auth`
+- [ ] Salvar token no `localStorage`
+- [ ] Criar `AuthGuard` para proteger rotas do admin
+- [ ] Implementar logout no header admin limpando o token
 
-- [] A senha do usuário precisa estar em formato hash;
+### Cardápio (cliente)
+- [ ] Criar `MenuService` consumindo `GET /menu`
+- [ ] Substituir dados mockados do `MenuComponent` pela listagem real da API
+- [ ] Exibir itens por categoria com filtro
 
-### Regras de Negócio (RN)
+### Cardápio (admin)
+- [ ] Listar itens consumindo `GET /menu` no `MenuItemsComponent`
+- [ ] Ativar/desativar item consumindo `PATCH /menu/:id` com `{ available: boolean }`
+- [ ] Deletar item (adicionar endpoint `DELETE /menu/:id` na API)
+- [ ] Criar formulário de novo item consumindo `POST /menu`
 
-- [] O usuário não deve poder se cadastrar com e-mail duplicado;
+### Pedidos (cliente)
+- [ ] Criar `CartService` para gerenciar itens do carrinho localmente
+- [ ] Criar pedido consumindo `POST /orders` com `guest_id` e itens
+- [ ] Listar pedidos do hóspede consumindo `GET /orders/:guest_id`
+- [ ] Exibir status do pedido em tempo real no `OrderStatusComponent`
 
-## Fluxograma de Desenvolvimento
+### Pedidos (admin)
+- [ ] Listar todos os pedidos (adicionar endpoint `GET /orders` na API)
+- [ ] Atualizar status consumindo `PATCH /orders/:id/status`
 
-## Estrutura do Banco de Dados
+### Hóspede / QRCode
+- [ ] Identificar hóspede via token na URL consumindo `GET /guests/:token`
+- [ ] Salvar `guest_id` no `localStorage` ao acessar via QRCode
+- [ ] Redirecionar para `/menu` após identificação
 
-## Comandos para Iniciar o Projeto
+---
 
-### NodeJS
+## Regras de Negócio
 
-### AngularJS
-- ng generate component pages/admin-login
-  [serve para criar páginas no projeto, já realiza o registro automaticamente no app.module.ts]
+- [ ] Hóspede não pode ter mais de um pedido ativo (pending/preparing) simultaneamente
+- [ ] Senha do usuário armazenada em hash (bcryptjs)
+- [ ] Usuário não pode se cadastrar com e-mail duplicado
 
-- ng g c pages/admin-login
-  [serve para criar a página, mas é um comando mais curto em compensação com o anterior]
+---
+
+## Comandos Úteis
+
+### API
+```bash
+npm run dev       # inicia em modo desenvolvimento
+npx prisma migrate dev  # roda migrations
+npx prisma studio       # interface visual do banco
+```
+
+### Web
+```bash
+pnpm run start    # inicia o servidor de desenvolvimento
+ng g c pages/nome # gera novo componente
+ng generate environments # gera a pasta "environments" com dois arquivos: environment.ts e environment.development.ts
+ng generate service services/api # criar arquivo service para lidar com as requisições da API, podendo ser reutilizado entre os componentes
+npm install @fastify/jwt
+```

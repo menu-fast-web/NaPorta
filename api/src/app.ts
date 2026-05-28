@@ -1,14 +1,64 @@
 import fastify, { type FastifyReply, type FastifyRequest } from "fastify";
 import z from "zod";
 import { prisma } from "./lib/prisma";
-import { hash } from "bcryptjs";
-import cors from '@fastify/cors';
+import { compare, hash } from "bcryptjs";
+import cors from "@fastify/cors";
+import { env } from "./env";
+import jwt from "@fastify/jwt";
 
 export const app = fastify();
 
-app.register(cors, 
-  { origin: '*' }
+app.register(cors, { origin: "*" });
+
+app.register(
+  jwt, 
+  { 
+    secret: env.JWT_SECRET 
+  }
 );
+
+const getAuthenticateSchemaBody = z.object({
+  email: z.email(),
+  password: z.string().min(4),
+});
+
+app.post("/sessions", async (req: FastifyRequest, reply: FastifyReply) => {
+  const { email, password } = getAuthenticateSchemaBody.parse(req.body);
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) {
+    return reply.status(400).send({ error: "Invalid credentials error." });
+  }
+
+  const doesPasswordMatches = await compare(password, user.password_hash);
+
+  if (!doesPasswordMatches) {
+    return reply.status(400).send({ error: "Invalid credentials error." });
+  }
+
+  try {
+    const token = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+          // expiresIn: "1d",
+        },
+      },
+    );
+
+    return reply.status(200).send({
+      token,
+    });
+  } catch (err) {
+    console.error("Houve um problema no cadastro do usuário: ", err);
+  }
+});
 
 const getUserSchemaRequest = z.object({
   query: z.string().optional(),
@@ -205,7 +255,9 @@ const updateMenuItemSchema = z.object({
   description: z.string().nullable().optional(),
   price: z.number().positive().optional(),
   image_url: z.string().url().nullable().optional(),
-  category: z.enum(["breakfast", "lunch", "dinner", "drinks", "snacks"]).optional(),
+  category: z
+    .enum(["breakfast", "lunch", "dinner", "drinks", "snacks"])
+    .optional(),
   available: z.boolean().optional(),
 });
 
