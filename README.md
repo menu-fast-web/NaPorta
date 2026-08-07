@@ -8,6 +8,54 @@ Software para gerenciamento de solicitação de serviço de quarto. O cliente re
 
 ---
 
+## 🌐 Demo
+
+- **Frontend:** https://na-porta-gamma.vercel.app
+- **API:** https://naporta.onrender.com
+
+> ⚠️ A API está hospedada no plano gratuito do Render e pode demorar ~30s para responder na primeira requisição após inatividade.
+
+---
+
+## 🧭 Como testar
+
+### Painel Admin
+
+1. Acesse https://na-porta-gamma.vercel.app/admin/sign-in
+2. Use as credenciais de demonstração:
+   - **Email:** `admin@naporta.com`
+   - **Senha:** `123456`
+3. Navegue pelo dashboard, cardápio e pedidos
+
+### Fluxo do Hóspede (QRCode)
+
+O admin cria um quarto e um hóspede via API, que gera um token único:
+
+**1. Criar quarto:**
+```http
+POST https://naporta.onrender.com/rooms
+Content-Type: application/json
+
+{ "number": "101" }
+```
+
+**2. Criar hóspede** (use o `id` retornado no passo anterior):
+```http
+POST https://naporta.onrender.com/guests
+Content-Type: application/json
+
+{ "name": "João Silva", "room_id": "<id_do_quarto>" }
+```
+
+**3. Acessar como hóspede:**
+```
+https://na-porta-gamma.vercel.app/guest/<token>
+```
+
+O hóspede é identificado e redirecionado ao cardápio automaticamente.
+
+---
+
 ## Estrutura do Repositório
 
 - **`/api`** — Backend Node.js (Fastify)
@@ -17,6 +65,7 @@ Software para gerenciamento de solicitação de serviço de quarto. O cliente re
 
 - **Backend:** Node.js, Fastify, Prisma ORM v7, PostgreSQL, Docker, Zod, bcryptjs
 - **Frontend:** Angular 16, Tailwind CSS, Angular Material
+- **Infra:** Vercel (frontend), Render (API), Neon (PostgreSQL)
 - **Tooling:** TypeScript, ESLint, Prettier
 
 ---
@@ -62,17 +111,17 @@ Software para gerenciamento de solicitação de serviço de quarto. O cliente re
 - [ ] Exibir status do pedido em tempo real no `OrderStatusComponent`
 
 ### Hóspede / QRCode
-- [ ] Identificar hóspede via token na URL consumindo `GET /guests/:token`
-- [ ] Salvar `guest_id` no `localStorage` ao acessar via QRCode
-- [ ] Redirecionar para `/menu` após identificação
+- [x] Identificar hóspede via token na URL consumindo `GET /guests/:token`
+- [x] Salvar `guest_id` no `localStorage` ao acessar via QRCode
+- [x] Redirecionar para `/menu` após identificação
 
 ---
 
 ## Regras de Negócio
 
-- [ ] Hóspede não pode ter mais de um pedido ativo (pending/preparing) simultaneamente
-- [ ] Senha do usuário armazenada em hash (bcryptjs)
-- [ ] Usuário não pode se cadastrar com e-mail duplicado
+- [x] Hóspede não pode ter mais de um pedido ativo (pending/preparing) simultaneamente
+- [x] Senha do usuário armazenada em hash (bcryptjs)
+- [x] Usuário não pode se cadastrar com e-mail duplicado
 
 ---
 
